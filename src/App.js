@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import * as rxjs from 'rxjs';
-import { switchMap, filter, repeat, delay, take } from 'rxjs/operators';
+import { filter, repeat, delay, take } from 'rxjs/operators';
 import mockedData from './mockedData';
 import './App.css';
 
@@ -29,7 +29,10 @@ class App extends Component {
     );
     
     // subscribing for the events
-    const subscribe = upcoming$.subscribe(val => console.log(val));
+    upcoming$.subscribe(val => console.log(`
+      current time: ${moment().format('MMMM Do YYYY, h:mm:ss a')}
+      current EPG: startTime: ${val.startTime} (Unix Millisecond Timestamp) and title: ${val.tvShow.title}
+    `));
   }
   
   render() {    
